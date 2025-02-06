@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="424.0" prefWidth="687.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="Controller.FXMLDocumentController">
+   <children>
+      <ChoiceBox fx:id="cb1" layoutX="251.0" layoutY="187.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
