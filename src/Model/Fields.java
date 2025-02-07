@@ -1,6 +1,6 @@
 package Model;
 
-import Controller.Connexion;
+import Controller.Insert;
 import conexiondb.ConexionMySQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,14 +74,11 @@ public class Fields {
         try{
 
             
-            //Connection conn = null;
-            //conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/tennis_club", "root", "123456");
-            //PreparedStatement pst = conn.prepareStatement("Select * from fields");
-                    
-            ConexionMySQL conn = new ConexionMySQL("localhost", "tennis_club", "root", "123456");
-            conn.ejecutarConsulta("select * from fields");
+            Connection conn = null;
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/tennis_club?serverTimezone=UTC", "root", "123456");
+            PreparedStatement pst = conn.prepareStatement("Select * from fields");
             
-            ResultSet rs = conn.getResultSet();
+            ResultSet rs = pst.getResultSet();
             
             while(rs.next()){
                 int id = rs.getInt("ID");
