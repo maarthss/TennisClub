@@ -95,26 +95,28 @@ public class Fields {
         }
     }
     
-    public ObservableList<Object> getFields(String column){
-        ObservableList<Object> obs = FXCollections.observableArrayList();
+    public ObservableList<Fields> getFields(){
+        ObservableList<Fields> obs = FXCollections.observableArrayList();
         
         Select s = new Select();
         
         try{
-            s.connect("fields", column);
+            s.connect("fields");
             ResultSet rs = s.pst.executeQuery();
             
             while(rs.next()){
-                Object response = rs.getObject(column);
-                obs.add(response);
+                int id = rs.getInt("ID");
+                String name = rs.getString("name");
+                Double price = rs.getDouble("price");
+                String status = rs.getString("status");
+                
+                Fields f = new Fields(id, name, price, status);
+                obs.add(f);
             }
             
         }catch(SQLException e){
             e.printStackTrace();
         }
-        
-        //Primer provar amb una connexió a fields desde la classe Fields per comprovar que vagi be. Si es així, passar sa connexio a sa classe connexion i fer alla
-        //els mètodes crud generals i despres ajustar-los a cada classe.
         
         return obs;
     } 

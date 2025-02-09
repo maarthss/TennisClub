@@ -8,11 +8,6 @@ public class Update implements Connection{
         
         
     }
-
-    
-    
-    
-    
     
     @Override
     public void connect(String table, int quantityValues) {
@@ -20,7 +15,7 @@ public class Update implements Connection{
     }
 
     @Override
-    public void connect(String table, String column) {
+    public void connect(String table, String column, String id) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
     

@@ -12,6 +12,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
 
@@ -27,19 +28,19 @@ public class RUD_fieldsController implements Initializable {
     private ChoiceBox statusFields;
     
     @FXML
-    private TableColumn<Object, Integer> columnID;
+    private TableColumn columnID;
     
     @FXML
-    private TableColumn<Object, String> columnName;
+    private TableColumn columnName;
     
     @FXML
-    private TableColumn<Object, Double> columnPrice;
+    private TableColumn columnPrice;
     
     @FXML
-    private TableColumn<Object, String> columnStatus;
+    private TableColumn columnStatus;
     
     @FXML
-    private TableView<Object> tableFields;
+    private TableView<Fields> tableFields;
     
     @FXML
     private Button btUpdate;
@@ -53,8 +54,13 @@ public class RUD_fieldsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        
         Fields f = new Fields();
+        columnID.setCellValueFactory(new PropertyValueFactory("id"));
+        columnName.setCellValueFactory(new PropertyValueFactory("name"));
+        columnPrice.setCellValueFactory(new PropertyValueFactory("price"));
+        columnStatus.setCellValueFactory(new PropertyValueFactory("status"));
+        
+        tableFields.setItems(f.getFields());
     }    
     
 }

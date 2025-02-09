@@ -2,31 +2,23 @@
 package Controller;
 
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class Select implements Connection{
-    
-    public static Connection conn;
-    public static PreparedStatement pst;
-    public static String query;
+public class Delete implements Connection{
 
     @Override
-    public void connect(String table) {
+    public void connect(String table, String column, String id) {
         
         try{
             
             java.sql.Connection conn = null;
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis_club", "root", "123456");
-            query = "SELECT * FROM " + table;
             
-            pst = conn.prepareStatement(query);
+            String query = "DELETE * FROM " + column + " WHERE ";
             
         }catch(Exception e){
-            Logger.getLogger(Insert.class.getName()).log(Level.SEVERE, null, e);
-
+            e.printStackTrace();
         }
+        
     }
 
     @Override
@@ -35,8 +27,10 @@ public class Select implements Connection{
     }
 
     @Override
-    public void connect(String table, String column, String id) {
+    public void connect(String table) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
+    
+    
     
 }

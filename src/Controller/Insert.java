@@ -67,12 +67,12 @@ public class Insert implements Connection {
     }
 
     @Override
-    public void connect(String table, String column) {
+    public void connect(String table) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
-    public void connect(String table) {
+    public void connect(String table, String column, String id) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
        
