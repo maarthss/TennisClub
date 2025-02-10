@@ -4,6 +4,7 @@ package Controller.CRUD;
 import Controller.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.List;
 
 public class Delete implements Connection{
     
@@ -39,8 +40,13 @@ public class Delete implements Connection{
     }
 
     @Override
-    public void connect(String table, String row, int id) {
+    public void connect(String table, String row, String value, int id) {
         throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+    @Override
+    public void connect(String table, List<String> columns) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

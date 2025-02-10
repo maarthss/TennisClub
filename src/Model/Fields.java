@@ -3,6 +3,7 @@ package Model;
 import Controller.CRUD.Delete;
 import Controller.CRUD.Insert;
 import Controller.CRUD.Select;
+import Controller.CRUD.Update;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.ResultSet;
@@ -10,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,24 +73,28 @@ public class Fields {
     public void insertField(String name, Double price, String status){
         try {
             Insert i = new Insert();
-            i.connect("fields", 3);
+            List<String> columns = Arrays.asList("name", "price", "status");
+            i.connect("fields", columns);
             
             System.out.println(i.query);
+            
             
             i.pst.setString(1, name);
             i.pst.setDouble(2, price);
             i.pst.setString(3, status);
             
+            i.pst.executeUpdate();
+            
             
             //Si s'activa sense un event des botó dona error, ja que intentam ficar valors null
-            int rowsAffected = i.pst.executeUpdate();
+            /*int rowsAffected = i.pst.executeUpdate();
 
             // Verifica si la inserción fue exitosa
             if (rowsAffected > 0) {
                 System.out.println("Fila insertada correctamente.");
             } else {
                 System.out.println("No se insertaron filas.");
-            }
+            }*/
 
             
         } catch (SQLException ex) {
@@ -131,7 +138,17 @@ public class Fields {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+    
+    
+    public void updateFields(String row, String value, int id){
+        Update u = new Update();
         
+        try{
+            u.connect("fields", row, value, id);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         
     }
     

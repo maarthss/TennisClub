@@ -30,15 +30,16 @@
       </Pane>
       <HBox layoutX="206.0" layoutY="66.0" prefHeight="47.0" prefWidth="448.0">
          <children>
-            <TextField fx:id="nameFields" prefHeight="25.0" prefWidth="145.0" />
+            <TextField fx:id="nameFields" onKeyReleased="#filterByName" prefHeight="25.0" prefWidth="145.0" />
             <Spinner fx:id="priceFields" />
             <ChoiceBox fx:id="statusFields" prefWidth="150.0" />
          </children>
       </HBox>
       <HBox layoutX="211.0" layoutY="620.0" prefHeight="63.0" prefWidth="437.0">
          <children>
-            <Button fx:id="btUpdate" mnemonicParsing="false" onMouseClicked="#deleteSelectedField" prefHeight="25.0" prefWidth="217.0" text="Update field" />
-            <Button fx:id="btDelete" mnemonicParsing="false" onMouseClicked="#deleteSelectedField" prefHeight="25.0" prefWidth="222.0" text="Delete field" />
+            <Button fx:id="btUpdate" mnemonicParsing="false" onMouseClicked="#updateSelectedField" prefHeight="25.0" prefWidth="151.0" text="Update field" />
+            <Button fx:id="btDelete" mnemonicParsing="false" onMouseClicked="#deleteSelectedField" prefHeight="25.0" prefWidth="138.0" text="Delete field" />
+            <Button fx:id="btInsert" mnemonicParsing="false" onMouseClicked="#goToInsert" prefHeight="25.0" prefWidth="147.0" text="Add field" />
          </children>
       </HBox>
    </children>

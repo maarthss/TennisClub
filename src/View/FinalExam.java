@@ -12,7 +12,7 @@ public class FinalExam extends Application {
     @Override
     public void start(Stage stage) throws Exception {
      
-        Parent root = FXMLLoader.load(getClass().getResource("/View/Fields/General/RUD_fields.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
                 
         Scene scene = new Scene(root);
         

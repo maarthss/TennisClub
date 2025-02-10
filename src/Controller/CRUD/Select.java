@@ -5,6 +5,7 @@ import Controller.CRUD.Insert;
 import Controller.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,7 +38,12 @@ public class Select implements Connection{
     }
 
     @Override
-    public void connect(String table, String row, int id) {
+    public void connect(String table, String row, String value, int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void connect(String table, List<String> columns) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
