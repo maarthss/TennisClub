@@ -1,42 +1,48 @@
 
-package Controller;
+package Controller.CRUD;
 
+import Controller.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class Select implements Connection{
+public class Delete implements Connection{
     
     public static Connection conn;
     public static PreparedStatement pst;
     public static String query;
 
+
     @Override
-    public void connect(String table) {
-        
+    public void connect(String table, int values) { //Values aquí es refereix a l'id, ja que sempre s'esborra a partir de l'id
+                
         try{
             
             java.sql.Connection conn = null;
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis_club", "root", "123456");
-            query = "SELECT * FROM " + table;
+            
+            String query = "DELETE FROM " + table + " WHERE ID" + " = ?" ;
             
             pst = conn.prepareStatement(query);
+            pst.setInt(1, values);
+            pst.executeUpdate();
+            
+            System.out.println("S'ha eliminat la fila");
             
         }catch(Exception e){
-            Logger.getLogger(Insert.class.getName()).log(Level.SEVERE, null, e);
-
+            e.printStackTrace();
         }
     }
 
     @Override
-    public void connect(String table, int quantityValues) {
+    public void connect(String table) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
-    public void connect(String table, String column, String id) {
+    public void connect(String table, String row, int id) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
+    
+    
     
 }

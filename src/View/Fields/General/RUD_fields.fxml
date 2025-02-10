@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" prefHeight="727.0" prefWidth="859.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="Controller.RUD_fieldsController">
+<AnchorPane id="AnchorPane" prefHeight="727.0" prefWidth="859.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLControllers.Fields.RUD_fieldsController">
     <stylesheets>
         <URL value="@rud_fields.css" />
     </stylesheets>
@@ -37,8 +37,8 @@
       </HBox>
       <HBox layoutX="211.0" layoutY="620.0" prefHeight="63.0" prefWidth="437.0">
          <children>
-            <Button fx:id="btUpdate" mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" text="Update field" />
-            <Button fx:id="btDelete" mnemonicParsing="false" prefHeight="25.0" prefWidth="222.0" text="Delete field" />
+            <Button fx:id="btUpdate" mnemonicParsing="false" onMouseClicked="#deleteSelectedField" prefHeight="25.0" prefWidth="217.0" text="Update field" />
+            <Button fx:id="btDelete" mnemonicParsing="false" onMouseClicked="#deleteSelectedField" prefHeight="25.0" prefWidth="222.0" text="Delete field" />
          </children>
       </HBox>
    </children>

@@ -1,8 +1,8 @@
 package Model;
 
-import Controller.Insert;
-import Controller.Select;
-import conexiondb.ConexionMySQL;
+import Controller.CRUD.Delete;
+import Controller.CRUD.Insert;
+import Controller.CRUD.Select;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.ResultSet;
@@ -120,5 +120,19 @@ public class Fields {
         
         return obs;
     } 
+    
+    public void deleteFields(int id){
+        
+        Delete d = new Delete();
+        
+        try{
+            d.connect("fields", id);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        
+    }
     
 }

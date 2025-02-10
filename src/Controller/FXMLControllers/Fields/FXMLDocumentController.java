@@ -1,4 +1,4 @@
-package Controller;
+package Controller.FXMLControllers.Fields;
 
 import Model.Fields;
 import java.net.URL;
