@@ -15,6 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Alert;
+
 
 public class Fields {
     
@@ -86,20 +88,10 @@ public class Fields {
             i.pst.executeUpdate();
             
             
-            //Si s'activa sense un event des botó dona error, ja que intentam ficar valors null
-            /*int rowsAffected = i.pst.executeUpdate();
-
-            // Verifica si la inserción fue exitosa
-            if (rowsAffected > 0) {
-                System.out.println("Fila insertada correctamente.");
-            } else {
-                System.out.println("No se insertaron filas.");
-            }*/
-
-            
         } catch (SQLException ex) {
             Logger.getLogger(Fields.class.getName()).log(Level.SEVERE, null, ex);
-        }
+  
+        } 
     }
     
     public ObservableList<Fields> getFields(){

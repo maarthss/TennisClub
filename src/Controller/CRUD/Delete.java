@@ -46,7 +46,7 @@ public class Delete implements Connection{
 
     @Override
     public void connect(String table, List<String> columns) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     

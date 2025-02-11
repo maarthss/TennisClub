@@ -19,11 +19,13 @@ public class Insert implements Connection {
     public static Connection conn;
     public static PreparedStatement pst;
     public static String query;
-    public static String columnNames = "";
-    public static String questionMark = "";
+
 
     @Override
     public void connect(String table, List<String> columns) {  //Values és numèric perquè es refereix a la QUANTITAT de valors que volem insertar
+        
+        String columnNames = "";
+        String questionMark = "";
         
         try {
             java.sql.Connection conn = null;
@@ -35,7 +37,7 @@ public class Insert implements Connection {
                 alert.setHeaderText("Can't add field");
                 alert.setContentText("All columns must be filled");
         
-        
+                
         Optional<ButtonType> result = alert.showAndWait();
             }
             
@@ -65,15 +67,11 @@ public class Insert implements Connection {
 
     @Override
     public void connect(String table, String row, String value, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void connect(String table, int values) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-       
-
-    
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }   
 }

@@ -1,5 +1,6 @@
 package Controller.FXMLControllers.Fields;
 
+import Controller.CRUD.Insert;
 import Model.Fields;
 import java.io.IOException;
 import java.net.URL;
@@ -49,23 +50,27 @@ public class FXMLDocumentController implements Initializable {
         statusFields.setItems(statusValues);
         
         priceFields.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(10.0, 25.0, 0.0, 0.2));      
-        //f1.insertField(name, price, status);
     }    
     
     @FXML
     public void insertData(){
+        
+        Insert i = new Insert();
+        
         String name = nameFields.getText();
         String status = (String) statusFields.getValue();
         Double price = (Double) priceFields.getValueFactory().getValue();
         
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Update Confirmation");
-        alert.setHeaderText("You're about to update a field");
+        alert.setTitle("Insert Confirmation");
+        alert.setHeaderText("You're about to add a field");
         alert.setContentText("Are you sure about that?");
         
         
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
+            
+
             Fields f = new Fields();
             f.insertField(name, price, status);
         
@@ -85,7 +90,5 @@ public class FXMLDocumentController implements Initializable {
                 Logger.getLogger(UpdateFieldsController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-  
     }
-    
 }
