@@ -6,6 +6,8 @@ package Controller.FXMLControllers;
 
 import Controller.FXMLControllers.Fields.RUD_fieldsController;
 import Controller.FXMLControllers.Fields.UpdateFieldsController;
+import Controller.FXMLControllers.Matches.GeneralMatchesController;
+import Controller.FXMLControllers.Members.GeneralMembersController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,6 +47,45 @@ public class MenuController implements Initializable {
             RUD_fieldsController controller = loader.getController();
             
             Stage stage = (Stage)btFields.getScene().getWindow();
+            
+            Scene newScene = new Scene(root);
+            stage.setScene(newScene);
+            stage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(RUD_fieldsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML
+    private void goToMembers(){
+        try {
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Members/General/GeneralMembers.fxml"));
+            Parent root = loader.load();
+            GeneralMembersController controller = loader.getController();
+            
+            Stage stage = (Stage)btMembers.getScene().getWindow();
+            
+            Scene newScene = new Scene(root);
+            stage.setScene(newScene);
+            stage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(RUD_fieldsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    @FXML
+    private void goToMatches(){
+        try {
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Matches/General/GeneralMatches.fxml"));
+            Parent root = loader.load();
+            GeneralMatchesController controller = loader.getController();
+            
+            Stage stage = (Stage)btMembers.getScene().getWindow();
             
             Scene newScene = new Scene(root);
             stage.setScene(newScene);

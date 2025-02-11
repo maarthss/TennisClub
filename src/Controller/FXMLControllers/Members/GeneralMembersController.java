@@ -33,6 +33,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.sql.Date;
+import java.time.LocalDate;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 
 
@@ -87,13 +89,27 @@ public class GeneralMembersController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        filteredList = FXCollections.observableArrayList();
+        
+        Members m = new Members();
+        columnID.setCellValueFactory(new PropertyValueFactory("id"));
+        columnDNI.setCellValueFactory(new PropertyValueFactory("dni"));
+        columnName.setCellValueFactory(new PropertyValueFactory("name"));
+        columnSurname.setCellValueFactory(new PropertyValueFactory("surname"));
+        columnMembership.setCellValueFactory(new PropertyValueFactory("membership_start"));
+        columnBirth.setCellValueFactory(new PropertyValueFactory("date_of_birth"));
+        columnPhone.setCellValueFactory(new PropertyValueFactory("phone_number"));
+        
+        tableMembers.setItems(m.selectMembers());
+        
+        
     }    
     
     @FXML
     public void deleteSelectedMember(){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete Confirmation");
-        alert.setHeaderText("You're about to delete a field");
+        alert.setHeaderText("You're about to delete a member");
         alert.setContentText("Are you sure about that?");
         
         Optional<ButtonType> result = alert.showAndWait();
@@ -120,13 +136,13 @@ public class GeneralMembersController implements Initializable {
     
     
     @FXML
-    public Members updateSelectedField(){   
+    public Members updateSelectedMember(){   
         
         Members m = null;
         
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Update Confirmation");
-        alert.setHeaderText("You're about to update a field");
+        alert.setHeaderText("You're about to update a member");
         alert.setContentText("Are you sure about that?");
         
         
@@ -139,8 +155,8 @@ public class GeneralMembersController implements Initializable {
                 String dni = selectedMember.getDni();
                 String name = selectedMember.getName();
                 String surname = selectedMember.getSurname();
-                Date membership = selectedMember.getMembership_start();
-                Date birth = selectedMember.getDate_of_birth();
+                LocalDate membership = selectedMember.getMembership_start();
+                LocalDate birth = selectedMember.getDate_of_birth();
                 String phoneNumber = selectedMember.getPhone_number();
 
                 m = new Members(id, dni, name, surname, membership, birth, phoneNumber);
@@ -151,7 +167,7 @@ public class GeneralMembersController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Members/Update/UpdateMembers.fxml"));
                 Parent root = loader.load();
                 UpdateMembersController ufController = loader.getController();
-                //ufController.getData(m);
+                ufController.getData(m);
             
                 Stage stage = (Stage)tableMembers.getScene().getWindow();
             
@@ -173,7 +189,7 @@ public class GeneralMembersController implements Initializable {
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Members/Insert/InsertMembers.fxml"));
             Parent root = loader.load();
-            FXMLDocumentController controller = loader.getController();
+            InsertMembersController controller = loader.getController();
             
             Stage stage = (Stage)btInsert.getScene().getWindow();
             

@@ -4,23 +4,123 @@
  */
 package Controller.FXMLControllers.Members;
 
+import Controller.FXMLControllers.Fields.RUD_fieldsController;
+import Controller.FXMLControllers.Fields.UpdateFieldsController;
+import Model.Fields;
+import Model.Members;
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author marta
- */
+
 public class UpdateMembersController implements Initializable {
+    
+    @FXML
+    private TextField tfDNI;
+    
+    @FXML
+    private TextField tfName;
+    
+    @FXML
+    private TextField tfSurname;
+    
+    @FXML
+    private TextField tfPhone;
+    
+    @FXML
+    private DatePicker dpMembership;
+    
+    @FXML
+    private DatePicker dpBirth;
+    
+    @FXML
+    private Button btUpdate;
+    
+    @FXML
+    private Label lbID;
 
-    /**
-     * Initializes the controller class.
-     */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+ 
     }    
     
+    @FXML
+    public void getData(Members member){
+        
+        lbID.setText(Integer.toString(member.getId()));
+        tfDNI.setText(member.getDni());
+        tfName.setText(member.getName());
+        tfSurname.setText(member.getSurname());
+        dpMembership.setValue(member.getMembership_start());
+        dpBirth.setValue(member.getDate_of_birth());
+        tfPhone.setText(member.getPhone_number());
+    }
+    
+    @FXML
+    public void setNewData(){
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Update Confirmation");
+        alert.setHeaderText("You're about to update a member");
+        alert.setContentText("Are you sure about that?");
+        
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK){
+            int id = Integer.parseInt(lbID.getText());
+            
+            String valueDni = tfDNI.getText();
+            String valueName = tfName.getText();
+            String valueSurname = tfSurname.getText();
+            String valueMembership = dpMembership.getValue().toString();
+            String valueBirth = dpBirth.getValue().toString();
+            String valuePhone = tfPhone.getText();
+            
+            Members m = new Members();
+            m.updateMember("dni", valueDni, id);
+            m.updateMember("name", valueName, id);
+            m.updateMember("surname", valueSurname, id);
+            m.updateMember("membership_start", valueMembership, id);
+            m.updateMember("date_of_birth", valueBirth, id);
+            m.updateMember("phone_number", valuePhone, id);
+            
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Members/General/GeneralMembers.fxml"));
+                Parent root = loader.load();
+                
+                GeneralMembersController controller = loader.getController();
+                
+                controller.refreshTable();
+                
+                Stage stage = (Stage)btUpdate.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(UpdateFieldsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+
+        }
+
+        
+    }
 }

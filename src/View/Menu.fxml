@@ -2,20 +2,22 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="Controller.FXMLControllers.MenuController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLControllers.MenuController">
     <stylesheets>
         <URL value="@menu.css" />
     </stylesheets>
    <children>
-      <VBox layoutX="165.0" layoutY="93.0" prefHeight="200.0" prefWidth="247.0">
+      <VBox layoutX="177.0" layoutY="124.0" prefHeight="200.0" prefWidth="247.0">
          <children>
-            <Button fx:id="btMatches" mnemonicParsing="false" prefHeight="49.0" prefWidth="247.0" text="Matches" />
-            <Button fx:id="btMembers" mnemonicParsing="false" prefHeight="49.0" prefWidth="247.0" text="Members" />
+            <Button fx:id="btMatches" mnemonicParsing="false" onMouseClicked="#goToMatches" prefHeight="49.0" prefWidth="247.0" text="Matches" />
+            <Button fx:id="btMembers" mnemonicParsing="false" onMouseClicked="#goToMembers" prefHeight="49.0" prefWidth="247.0" text="Members" />
             <Button fx:id="btFields" mnemonicParsing="false" onMouseClicked="#goToFields" prefHeight="50.0" prefWidth="247.0" text="Fields" />
          </children>
       </VBox>
+      <Label alignment="CENTER" layoutX="135.0" layoutY="55.0" prefHeight="38.0" prefWidth="322.0" text="TENNIS CLUB" />
    </children>
 </AnchorPane>

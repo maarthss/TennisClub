@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLControllers.Matches.GeneralMatchesController">
+<AnchorPane id="AnchorPane" prefHeight="777.0" prefWidth="884.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLControllers.Matches.GeneralMatchesController">
     <stylesheets>
-        <URL value="@generalmatches.css"/>
+        <URL value="@generalmatches.css" />
     </stylesheets>
+   <children>
+      <Pane layoutX="94.0" layoutY="177.0" prefHeight="459.0" prefWidth="711.0">
+         <children>
+            <TableView fx:id="tableMatches" layoutY="2.0" prefHeight="448.0" prefWidth="701.0">
+              <columns>
+                <TableColumn fx:id="columnID" text="ID" />
+                <TableColumn fx:id="columnDate" prefWidth="117.0" text="Date" />
+                  <TableColumn fx:id="columnResult" prefWidth="151.0" text="Result" />
+                  <TableColumn fx:id="columnMember1" prefWidth="122.0" text="Member 1" />
+                  <TableColumn fx:id="columnMember2" prefWidth="115.0" text="Member 2" />
+                  <TableColumn fx:id="columnField" prefWidth="114.0" text="Field" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <HBox layoutX="209.0" layoutY="680.0" prefHeight="47.0" prefWidth="467.0">
+         <children>
+            <Button fx:id="btUpdate" mnemonicParsing="false" onMouseClicked="#updateSelectedMatch" prefHeight="25.0" prefWidth="179.0" text="Update Match" />
+            <Button fx:id="btDelete" mnemonicParsing="false" onMouseClicked="#deleteSelectedMatch" prefHeight="25.0" prefWidth="191.0" text="Delete Match" />
+            <Button fx:id="btInsert" mnemonicParsing="false" onMouseClicked="#goToInsert" prefHeight="25.0" prefWidth="161.0" text="Add Match" />
+         </children>
+      </HBox>
+      <VBox layoutX="94.0" layoutY="107.0" prefHeight="61.0" prefWidth="211.0">
+         <children>
+            <Label text="Filter by ID" />
+            <TextField fx:id="tfMatches" onKeyReleased="#filterByID" prefHeight="25.0" prefWidth="161.0" />
+         </children>
+      </VBox>
+      <Label alignment="CENTER" layoutX="149.0" layoutY="49.0" prefHeight="47.0" prefWidth="556.0" text="MATCHES" />
+   </children>
 </AnchorPane>

@@ -21,11 +21,11 @@ public class Members {
     private String dni;
     private String name;
     private String surname;
-    private Date membership_start;
-    private Date date_of_birth;
+    private LocalDate membership_start;
+    private LocalDate date_of_birth;
     private String phone_number;
 
-    public Members(int id, String dni, String name, String surname, Date membership_start, Date date_of_birth, String phone_number) {
+    public Members(int id, String dni, String name, String surname, LocalDate membership_start, LocalDate date_of_birth, String phone_number) {
         this.id = id;
         this.dni = dni;
         this.name = name;
@@ -71,19 +71,19 @@ public class Members {
         this.surname = surname;
     }
 
-    public Date getMembership_start() {
+    public LocalDate getMembership_start() {
         return membership_start;
     }
 
-    public void setMembership_start(Date membership_start) {
+    public void setMembership_start(LocalDate membership_start) {
         this.membership_start = membership_start;
     }
 
-    public Date getDate_of_birth() {
+    public LocalDate getDate_of_birth() {
         return date_of_birth;
     }
 
-    public void setDate_of_birth(Date date_of_birth) {
+    public void setDate_of_birth(LocalDate date_of_birth) {
         this.date_of_birth = date_of_birth;
     }
 
@@ -101,7 +101,7 @@ public class Members {
     }
     
     
-    public void insertMember(String dni, String name, String surname, Date membership_start, Date date_of_birth, String phone_number){
+    public void insertMember(String dni, String name, String surname, LocalDate membership_start, LocalDate date_of_birth, String phone_number){
         
         try {
             Insert i = new Insert();
@@ -114,8 +114,8 @@ public class Members {
             i.pst.setString(1, dni);
             i.pst.setString(2, name);
             i.pst.setString(3, surname);
-            i.pst.setDate(4, membership_start);
-            i.pst.setDate(5, date_of_birth);
+            i.pst.setDate(4, java.sql.Date.valueOf(membership_start));
+            i.pst.setDate(5, java.sql.Date.valueOf(date_of_birth));
             i.pst.setString(6, phone_number);
             
             i.pst.executeUpdate();
@@ -142,11 +142,16 @@ public class Members {
                 String dni = rs.getString("dni");
                 String name = rs.getString("name");
                 String surname = rs.getString("surname");
+                
                 Date membership_start = rs.getDate("membership_start");
+                LocalDate membershipToLocalDate = membership_start.toLocalDate();
                 Date date_of_birth = rs.getDate("date_of_birth");
+                LocalDate birthToLocalDate = date_of_birth.toLocalDate();
                 String phone_number = rs.getString("phone_number");
                 
-                Members m = new Members(id, dni, name, surname, membership_start, date_of_birth, phone_number);
+                
+                
+                Members m = new Members(id, dni, name, surname, membershipToLocalDate, birthToLocalDate, phone_number);
                 obs.add(m);
             }
             
@@ -172,7 +177,7 @@ public class Members {
          Update u = new Update();
         
         try{
-            u.connect("fields", row, value, id);
+            u.connect("members", row, value, id);
         }catch(Exception e){
             e.printStackTrace();
         }

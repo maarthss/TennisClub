@@ -112,7 +112,6 @@ public class UpdateFieldsController implements Initializable {
 
         }
 
-        
     }
     
 }
