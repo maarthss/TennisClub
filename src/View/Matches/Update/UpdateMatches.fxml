@@ -29,46 +29,46 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+            <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="Label" />
+                  <Label text="Date" />
                   <DatePicker fx:id="dpDate" />
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                <children>
-                  <Label text="Label" />
+                  <Label text="Result" />
                   <TextArea fx:id="taResult" prefHeight="134.0" prefWidth="194.0" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                <children>
-                  <Label text="Label" />
+                  <Label text="ID Member " />
                   <TextField fx:id="tfMember1" />
                </children>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Label text="Label" />
+                  <Label text="ID Member" />
                   <TextField fx:id="tfMember2" />
                </children>
             </VBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="ID: " />
-                  <Label fx:id="lbID" prefHeight="25.0" prefWidth="82.0" text="Label" />
-               </children>
-            </HBox>
             <VBox prefHeight="126.0" prefWidth="316.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Label text="Label" />
+                  <Label text="ID Field" />
                   <TextField fx:id="tfField" />
                </children>
             </VBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Label id="idLabel" alignment="CENTER_RIGHT" prefHeight="92.0" prefWidth="114.0" text="ID: " />
+                  <Label id="idNumber" fx:id="lbID" prefHeight="95.0" prefWidth="136.0" text="Label" />
+               </children>
+            </HBox>
          </children>
       </GridPane>
       <Button id="btAddMatch" fx:id="btUpdate" layoutX="136.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#setNewData" prefHeight="25.0" prefWidth="529.0" text="Update Match" />
-      <Label id="titol" alignment="CENTER" layoutX="163.0" layoutY="50.0" prefHeight="49.0" prefWidth="475.0" text="MODIFY A MATCH" />
+      <Label id="titol" alignment="CENTER" layoutX="204.0" layoutY="51.0" prefHeight="59.0" prefWidth="393.0" text="MODIFY A MATCH" />
       <Button id="home" fx:id="btMatches" layoutX="136.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#goToMatches" />
    </children>
 </AnchorPane>

@@ -68,6 +68,7 @@ public class UpdateFieldsController implements Initializable {
         
     }    
     
+    //Aquest mètode es crida a un altre controlador i el que fa es carregar les dades del controller general a la pàgina d'actualització
     @FXML
     public void getData(Fields field){
         
@@ -81,7 +82,7 @@ public class UpdateFieldsController implements Initializable {
         
     }
     
-    
+    //Agafa les dades que hi ha als items, s'hagin canviat o no, i aplica la funció update sobre tots els items
     @FXML
     public void setNewData(){
         
@@ -99,6 +100,7 @@ public class UpdateFieldsController implements Initializable {
             String valueStatus = (String) cbStatus.getValue();
             String valuePrice = Double.toString((double) spPrice.getValueFactory().getValue());
             
+            //S'assegura de que no estiguin buits 
             if(valueName.isEmpty() || valueStatus == null){
             Alert error = new Alert(Alert.AlertType.WARNING);
             error.setTitle("Insert error");
@@ -134,7 +136,7 @@ public class UpdateFieldsController implements Initializable {
 
     }
     
-    
+    //Va a la pantalla anterior
     @FXML
     private void goBackFields(){
         try {

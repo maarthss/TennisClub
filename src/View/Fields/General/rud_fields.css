@@ -1,44 +1,54 @@
 .mainFxmlClass {
 
-    -fx-background-color: #b3cdbf;
+    -fx-background-color: #f4f4f4;
     -fx-padding: 20px;
-    
 }
 
 #titol {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333;
+    -fx-text-fill: #2d6a4f;
+    -fx-background-color: #d8f3dc;
+    -fx-padding: 10px;
     -fx-alignment: center;
+    -fx-border-color: #40916c;
+    -fx-border-width: 2px;
 }
 
-#bt1{
-    -fx-background-color: #4bab8e;
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #2d6a4f;
+    -fx-border-width: 2px;
+}
+
+.table-column {
+    -fx-font-size: 14px;
+    -fx-text-fill: #081c15;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #95d5b2;
     -fx-text-fill: white;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-padding: 10px;
-    -fx-border-radius: 5px;
 }
 
-#bt2{
-    -fx-background-color: #4bab8e;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-padding: 10px;
-    -fx-border-radius: 5px;
+#bt1:hover, #bt2:hover, #bt3:hover {
+    -fx-background-color: #d8f3dc;
 }
 
-#bt3{
-    -fx-background-color: #4bab8e;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-padding: 10px;
+.text-field {
+    -fx-border-color: #2d6a4f;
     -fx-border-radius: 5px;
+    -fx-padding: 5px;
 }
 
-#home:hover {
-    -fx-background-color: #4bab8e;
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2d6a4f;
 }
+
+#home {
+    -fx-background-color: transparent;
+}
+
+

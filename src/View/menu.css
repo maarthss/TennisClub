@@ -1,7 +1,7 @@
 
 .mainFxmlClass {
     
-    -fx-background-color: #b3cdbf;
+    -fx-background-color: #2E7D32;
     -fx-padding: 20px;
 
 }
@@ -9,33 +9,39 @@
 #titol {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333;
-    -fx-alignment: center;
+    -fx-text-fill: #FFFFFF; /* Blanco para destacar */
+    -fx-background-color: transparent;
 }
 
-children{
-    padding: 10px;
-}
-#bt1{
-    -fx-background-color: #4bab8e;
-    -fx-text-fill: white;
+.button {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2px;
     -fx-padding: 10px;
 }
 
-#bt2{
-    -fx-background-color: #4bab8e;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-padding: 10px;
+
+#bt1 { 
+    -fx-background-color: #FDD835; 
+}
+#bt2 { 
+    -fx-background-color: #FFA000; 
+}
+#bt3 {
+    -fx-background-color: #FF7043; 
 }
 
-#bt3{
-    -fx-background-color: #4bab8e;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-padding: 10px;
+
+#bt1:hover { 
+    -fx-background-color: #FFC107; 
 }
+#bt2:hover {
+    -fx-background-color: #FFB300; 
+}
+#bt3:hover {
+    -fx-background-color: #FF8A65; 
+}
+
+

@@ -1,27 +1,53 @@
 
 .mainFxmlClass {
-
-    -fx-background-color: #b3cdbf;
-    -fx-padding: 20px;
     
+    -fx-background-color: #f4f4f4;
+    -fx-padding: 20px;
 }
 
 #titol {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-text-fill: #333;
-    -fx-alignment: center;
-}
-
-#btAddMatch{
-    -fx-background-color: #4bab8e;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
+    -fx-text-fill: #2d6a4f;
+    -fx-background-color: #d8f3dc;
     -fx-padding: 10px;
-    -fx-border-radius: 5px;
+    -fx-alignment: center;
+    -fx-border-color: #40916c;
+    -fx-border-width: 2px;
 }
 
-#home:hover {
-    -fx-background-color: #4bab8e;
+.grid-pane {
+    -fx-padding: 20px;
+    -fx-hgap: 15px;
+    -fx-vgap: 15px;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2d6a4f;
+}
+
+.text-field, .date-picker {
+    -fx-border-color: #2d6a4f;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-background-color: #ffffff;
+}
+
+.button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: #40916c;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #1b4332;
+}
+
+#home {
+    -fx-background-color: transparent;
 }

@@ -74,6 +74,7 @@ public class RUD_fieldsController implements Initializable {
         
         filteredList = FXCollections.observableArrayList();
         
+        //Posa els valors de la base dades a la taula
         Fields f = new Fields();
         columnID.setCellValueFactory(new PropertyValueFactory("id"));
         columnName.setCellValueFactory(new PropertyValueFactory("name"));
@@ -81,7 +82,6 @@ public class RUD_fieldsController implements Initializable {
         columnStatus.setCellValueFactory(new PropertyValueFactory("status"));
         
         tableFields.setItems(f.getFields());
-        
         
         URL home = getClass().getResource("/Resources/casa.png");
         Image imgHome = new Image(home.toString(), 24, 24, false, true);
@@ -122,12 +122,14 @@ public class RUD_fieldsController implements Initializable {
         }
     }
     
+    //Es torna a carregar la taula, per assegurar-se de que els valors que s'han insertat, afegit o actualitzat es reflexen a la taula
     @FXML
     public void refreshTable(){
         Fields f = new Fields();
         tableFields.setItems(f.getFields());
     }
     
+    //S'assegura de que hi hagi un camp seleccionat i te duu a la pantalla d'actualització
     @FXML
     public Fields updateSelectedField(){
         
@@ -144,6 +146,7 @@ public class RUD_fieldsController implements Initializable {
             if(result.get() == ButtonType.OK){
                 Fields selectedField = tableFields.getSelectionModel().getSelectedItem();
         
+                //Verifica que hi hagi un camp seleccionat
                 if(selectedField != null){
                     int id = selectedField.getId();
                     String name = selectedField.getName();
@@ -184,6 +187,7 @@ public class RUD_fieldsController implements Initializable {
         return f;
     }
     
+    //Te duu a la pàgina d'inserció de dades
     @FXML
     private void goToInsert(){
         try {
@@ -204,6 +208,7 @@ public class RUD_fieldsController implements Initializable {
 
     }
     
+    //Mètode per filtrar per nom
     @FXML
     private void filterByName(){
         
@@ -223,6 +228,7 @@ public class RUD_fieldsController implements Initializable {
         }
     }
     
+    //Mètode per anar a la pàgina anterior
      @FXML
     private void goBackHome(){
         try {

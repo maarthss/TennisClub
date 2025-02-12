@@ -56,12 +56,14 @@ public class FXMLDocumentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        
+        //Al choiceBox se li diu que tengui els valors Free i reserved
         ObservableList<String> statusValues = FXCollections.observableArrayList("Free", "Reserved");
         statusFields.setItems(statusValues);
         
+        //S'estableixen limits de l'spinner
         priceFields.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(10.0, 25.0, 0.0, 0.2)); 
         
+        //Es posa la imatge de la carpeta recources al botó
         URL home = getClass().getResource("/Resources/casa.png");
         Image imgHome = new Image(home.toString(), 24, 24, false, true);
         btBackToFields.setGraphic((new ImageView(imgHome)));
@@ -69,19 +71,21 @@ public class FXMLDocumentController implements Initializable {
     }    
     
     @FXML
-    public void insertData(){
+    public void insertData(){ //Mètode al que es crida quan es fa click al botó d'afegir, que es l'encarregat d'afegir la informació a la bbdd
         
         Insert i = new Insert();
         
+        //Agafam els valors insertats
         String name = nameFields.getText();
         String status = (String) statusFields.getValue();
-        Double price = (Double) priceFields.getValueFactory().getValue();
+        Double price = (Double) priceFields.getValueFactory().getValue();  
         
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Insert Confirmation");
         alert.setHeaderText("You're about to add a field");
         alert.setContentText("Are you sure about that?");
         
+        //Es verifica que ningun valor estigui en blanc
         if(name.isEmpty() || status == null){
             Alert error = new Alert(Alert.AlertType.WARNING);
             error.setTitle("Insert error");
@@ -90,8 +94,10 @@ public class FXMLDocumentController implements Initializable {
             error.showAndWait();
             return;
         }
-            
+        
+        
         Optional<ButtonType> result = alert.showAndWait();
+        //Si el botó que es pitja a l'alert informatiu és OK
         if(result.get() == ButtonType.OK){
             try{
                 //Miram si el nom del field està repetit
@@ -99,6 +105,7 @@ public class FXMLDocumentController implements Initializable {
                     Fields f = new Fields();
                     f.insertField(name, price, status);
         
+                    //Es torna a la pantalla general
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fields/General/RUD_fields.fxml"));
                         Parent root = loader.load();
@@ -128,6 +135,7 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
+    //Mètode que s'empra per tornar a la pantalla anterior sense passar dades
     @FXML
     private void goBackFields(){
         try {
@@ -147,6 +155,7 @@ public class FXMLDocumentController implements Initializable {
         }
     }
     
+    //Mètode que mira si una pista està introduida a una base de dades
     private boolean validationField(String fieldName){
         
         boolean fieldExists = false;

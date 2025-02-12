@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="AnchorPane" prefHeight="491.0" prefWidth="705.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLControllers.Fields.FXMLDocumentController" stylesheets="@FXMLDocument.css">
-    
     <children>
       <GridPane layoutX="141.0" layoutY="145.0" prefHeight="218.0" prefWidth="426.0">
         <columnConstraints>
@@ -45,7 +44,7 @@
          </children>
       </GridPane>
       <Button fx:id="btFields" layoutX="131.0" layoutY="385.0" mnemonicParsing="false" onMouseClicked="#insertData" prefHeight="30.0" prefWidth="446.0" text="Add field" />
-      <Label alignment="CENTER" layoutX="209.0" layoutY="48.0" prefHeight="59.0" prefWidth="289.0" text="ADD FIELD" />
-      <Button fx:id="btBackToFields" layoutX="131.0" layoutY="53.0" mnemonicParsing="false" onMouseClicked="#goBackFields" />
+      <Label id="titol" alignment="CENTER" layoutX="209.0" layoutY="48.0" prefHeight="59.0" prefWidth="289.0" text="ADD FIELD" />
+      <Button id="home" fx:id="btBackToFields" layoutX="131.0" layoutY="53.0" mnemonicParsing="false" onMouseClicked="#goBackFields" />
    </children>
 </AnchorPane>

@@ -22,7 +22,7 @@ public class Insert implements Connection {
 
 
     @Override
-    public void connect(String table, List<String> columns) {  //Values és numèric perquè es refereix a la QUANTITAT de valors que volem insertar
+    public void connect(String table, List<String> columns) {  
         
         String columnNames = "";
         String questionMark = "";
@@ -31,6 +31,7 @@ public class Insert implements Connection {
             java.sql.Connection conn = null;
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis_club", "root", "123456");
             
+            //Es verifica que no es deixin camps en blanc
             if (columns == null || columns.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Insert field");
