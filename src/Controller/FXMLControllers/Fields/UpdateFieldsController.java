@@ -91,12 +91,22 @@ public class UpdateFieldsController implements Initializable {
         alert.setContentText("Are you sure about that?");
         
         
+        
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
             int id = Integer.parseInt(lbID.getText());
             String valueName = tfName.getText();
             String valueStatus = (String) cbStatus.getValue();
             String valuePrice = Double.toString((double) spPrice.getValueFactory().getValue());
+            
+            if(valueName.isEmpty() || valueStatus == null){
+            Alert error = new Alert(Alert.AlertType.WARNING);
+            error.setTitle("Insert error");
+            error.setHeaderText("Field could not be added");
+            error.setContentText("All fields must be filled");
+            error.showAndWait();
+            return;
+        }
         
             Fields f = new Fields();
             f.updateFields("name", valueName, id);

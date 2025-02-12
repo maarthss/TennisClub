@@ -30,9 +30,9 @@
       </Pane>
       <HBox layoutX="211.0" layoutY="620.0" prefHeight="63.0" prefWidth="437.0">
          <children>
-            <Button fx:id="btUpdate" mnemonicParsing="false" onMouseClicked="#updateSelectedField" prefHeight="25.0" prefWidth="151.0" text="Update field" />
-            <Button fx:id="btDelete" mnemonicParsing="false" onMouseClicked="#deleteSelectedField" prefHeight="25.0" prefWidth="138.0" text="Delete field" />
-            <Button fx:id="btInsert" mnemonicParsing="false" onMouseClicked="#goToInsert" prefHeight="25.0" prefWidth="147.0" text="Add field" />
+            <Button id="bt1" fx:id="btUpdate" mnemonicParsing="false" onMouseClicked="#updateSelectedField" prefHeight="25.0" prefWidth="151.0" text="Update field" />
+            <Button id="bt2" fx:id="btDelete" mnemonicParsing="false" onMouseClicked="#deleteSelectedField" prefHeight="25.0" prefWidth="138.0" text="Delete field" />
+            <Button id="bt3" fx:id="btInsert" mnemonicParsing="false" onMouseClicked="#goToInsert" prefHeight="25.0" prefWidth="147.0" text="Add field" />
          </children>
       </HBox>
       <VBox layoutX="132.0" layoutY="86.0" prefHeight="47.0" prefWidth="159.0">
@@ -41,7 +41,7 @@
             <TextField fx:id="nameFields" onKeyReleased="#filterByName" prefHeight="25.0" prefWidth="145.0" />
          </children>
       </VBox>
-      <Label alignment="CENTER" layoutX="315.0" layoutY="46.0" prefHeight="40.0" prefWidth="236.0" text="FIELDS" />
-      <Button fx:id="btHome" layoutX="132.0" layoutY="46.0" mnemonicParsing="false" onMouseClicked="#goBackHome" />
+      <Label id="titol" alignment="CENTER" layoutX="315.0" layoutY="46.0" prefHeight="40.0" prefWidth="236.0" text="FIELDS" />
+      <Button id="home" fx:id="btHome" layoutX="132.0" layoutY="46.0" mnemonicParsing="false" onMouseClicked="#goBackHome" />
    </children>
 </AnchorPane>

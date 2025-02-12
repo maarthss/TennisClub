@@ -120,6 +120,15 @@ public class UpdateMatchesController implements Initializable {
             String valueMember2 = tfMember2.getText();
             String valueField = tfField.getText();
             
+            if(valueDate == null || tfMember1.getText().isEmpty() ||tfMember2.getText().isEmpty() || tfField.getText().isEmpty()){
+            Alert error = new Alert(Alert.AlertType.WARNING);
+            error.setTitle("Insert error");
+            error.setHeaderText("Field could not be added");
+            error.setContentText("All fields must be filled");
+            error.showAndWait();
+            return;
+            }
+            
             Matches m = new Matches();
             m.updateMatch("date", valueDate, id);
             m.updateMatch("result", valueResult, id);

@@ -147,6 +147,15 @@ public class UpdateMembersController implements Initializable {
             String valueBirth = dpBirth.getValue().toString();
             String valuePhone = tfPhone.getText();
             
+            if(valueDni.isEmpty() || valueName.isEmpty() || valueSurname.isEmpty() ||  valueMembership == null || valueBirth == null || valuePhone.isEmpty()){
+            Alert error = new Alert(Alert.AlertType.WARNING);
+            error.setTitle("Insert error");
+            error.setHeaderText("Field could not be added");
+            error.setContentText("All fields must be filled");
+            error.showAndWait();
+            return;
+        }
+            
             Members m = new Members();
             m.updateMember("dni", valueDni, id);
             m.updateMember("name", valueName, id);

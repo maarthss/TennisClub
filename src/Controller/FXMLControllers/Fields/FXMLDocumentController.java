@@ -1,10 +1,15 @@
 package Controller.FXMLControllers.Fields;
 
 import Controller.CRUD.Insert;
+import Controller.FXMLControllers.Members.InsertMembersController;
 import Controller.FXMLControllers.MenuController;
 import Model.Fields;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -77,28 +82,48 @@ public class FXMLDocumentController implements Initializable {
         alert.setHeaderText("You're about to add a field");
         alert.setContentText("Are you sure about that?");
         
-        
+        if(name.isEmpty() || status == null){
+            Alert error = new Alert(Alert.AlertType.WARNING);
+            error.setTitle("Insert error");
+            error.setHeaderText("Field could not be added");
+            error.setContentText("All fields must be filled");
+            error.showAndWait();
+            return;
+        }
+            
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
-            
-
-            Fields f = new Fields();
-            f.insertField(name, price, status);
+            try{
+                //Miram si el nom del field està repetit
+                if(!validationField(name)){
+                    Fields f = new Fields();
+                    f.insertField(name, price, status);
         
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fields/General/RUD_fields.fxml"));
-                Parent root = loader.load();
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fields/General/RUD_fields.fxml"));
+                        Parent root = loader.load();
                 
-                RUD_fieldsController controller = loader.getController();
+                        RUD_fieldsController controller = loader.getController();
                 
-                controller.refreshTable();
+                        controller.refreshTable();
                 
-                Stage stage = (Stage)btFields.getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                Logger.getLogger(UpdateFieldsController.class.getName()).log(Level.SEVERE, null, ex);
+                        Stage stage = (Stage)btFields.getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(UpdateFieldsController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    throw new Exception();
+                }
+            
+            }catch(Exception e){
+                Alert error = new Alert(Alert.AlertType.ERROR);
+                error.setTitle("Insert failed");
+                error.setHeaderText("Can't insert the field");
+                error.setContentText("Field name already exists");
+                error.showAndWait();
             }
         }
     }
@@ -120,6 +145,30 @@ public class FXMLDocumentController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(RUD_fieldsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private boolean validationField(String fieldName){
+        
+        boolean fieldExists = false;
+        java.sql.Connection conn = null;
+        
+        String query = "SELECT * FROM fields WHERE name = ?";
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis_club", "root", "123456");
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, fieldName);
+            
+            try (ResultSet rs = pst.executeQuery()){
+                if(rs.next()){
+                    fieldExists = true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertMembersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                    
+        return fieldExists;
     }
     
 }

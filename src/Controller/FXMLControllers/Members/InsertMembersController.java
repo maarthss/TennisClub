@@ -37,6 +37,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 import org.w3c.dom.Document;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+
 
 
 public class InsertMembersController implements Initializable {
@@ -135,30 +139,53 @@ public class InsertMembersController implements Initializable {
         alert.setHeaderText("You're about to add a member");
         alert.setContentText("Are you sure about that?");
         
+        if(dni.isEmpty() || name.isEmpty() || surname.isEmpty() || membership == null || birth == null || phoneNumber.isEmpty()){
+            Alert error = new Alert(Alert.AlertType.WARNING);
+            error.setTitle("Insert error");
+            error.setHeaderText("Field could not be added");
+            error.setContentText("All fields must be filled");
+            error.showAndWait();
+            return;
+        }
+        
         
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
             
-
-            Members m = new Members();
-            m.insertMember(dni, name, surname, membership, birth, phoneNumber);
-        
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Members/General/GeneralMembers.fxml"));
-                Parent root = loader.load();
+            try{
+            
+            if(!validationDNI(dni)){
+                Members m = new Members();
+                m.insertMember(dni, name, surname, membership, birth, phoneNumber);
                 
-                GeneralMembersController controller = loader.getController();
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Members/General/GeneralMembers.fxml"));
+                    Parent root = loader.load();
                 
-                controller.refreshTable();
+                    GeneralMembersController controller = loader.getController();
                 
-                Stage stage = (Stage)btInsert.getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                Logger.getLogger(UpdateFieldsController.class.getName()).log(Level.SEVERE, null, ex);
+                    controller.refreshTable();
+                
+                    Stage stage = (Stage)btInsert.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(UpdateFieldsController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                throw new Exception();
             }
+        
+        }catch(Exception e){
+            Alert error = new Alert(Alert.AlertType.ERROR);
+            error.setTitle("Insert error");
+            error.setHeaderText("Member could not be added");
+            error.setContentText("This dni is already on the database");
+            error.showAndWait();
         }
+        }
+        
     }
     
     @FXML
@@ -185,21 +212,23 @@ public class InsertMembersController implements Initializable {
         
         boolean dniExists = false;
         java.sql.Connection conn = null;
+        
+        String query = "SELECT * FROM members WHERE DNI = ?";
 
         try {
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis_club", "root", "123456");
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, dni);
             
-            String query = "SELECT * FROM members WHERE DNI = " + dni ;
+            try (ResultSet rs = pst.executeQuery()){
+                if(rs.next()){
+                    dniExists = true;
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(InsertMembersController.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-        String query = "SELECT * FROM members WHERE DNI = " + dni ;
-        //Statement st = conn.createStatement(query);
-        
-        
-        
-        
+                    
         return dniExists;
     }
 }

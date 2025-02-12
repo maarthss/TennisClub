@@ -67,8 +67,8 @@
             </VBox>
          </children>
       </GridPane>
-      <Button fx:id="btUpdate" layoutX="136.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#setNewData" prefHeight="25.0" prefWidth="529.0" text="Update Match" />
-      <Label alignment="CENTER" layoutX="163.0" layoutY="50.0" prefHeight="49.0" prefWidth="475.0" text="MODIFY A MATCH" />
-      <Button fx:id="btMatches" layoutX="136.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#goToMatches" />
+      <Button id="btAddMatch" fx:id="btUpdate" layoutX="136.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#setNewData" prefHeight="25.0" prefWidth="529.0" text="Update Match" />
+      <Label id="titol" alignment="CENTER" layoutX="163.0" layoutY="50.0" prefHeight="49.0" prefWidth="475.0" text="MODIFY A MATCH" />
+      <Button id="home" fx:id="btMatches" layoutX="136.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#goToMatches" />
    </children>
 </AnchorPane>

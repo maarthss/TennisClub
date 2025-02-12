@@ -13,11 +13,11 @@
    <children>
       <VBox layoutX="177.0" layoutY="124.0" prefHeight="200.0" prefWidth="247.0">
          <children>
-            <Button fx:id="btMatches" mnemonicParsing="false" onMouseClicked="#goToMatches" prefHeight="49.0" prefWidth="247.0" text="Matches" />
-            <Button fx:id="btMembers" mnemonicParsing="false" onMouseClicked="#goToMembers" prefHeight="49.0" prefWidth="247.0" text="Members" />
-            <Button fx:id="btFields" mnemonicParsing="false" onMouseClicked="#goToFields" prefHeight="50.0" prefWidth="247.0" text="Fields" />
+            <Button id="bt1" fx:id="btMatches" mnemonicParsing="false" onMouseClicked="#goToMatches" prefHeight="49.0" prefWidth="247.0" text="Matches" />
+            <Button id="bt2" fx:id="btMembers" mnemonicParsing="false" onMouseClicked="#goToMembers" prefHeight="49.0" prefWidth="247.0" text="Members" />
+            <Button id="bt3" fx:id="btFields" mnemonicParsing="false" onMouseClicked="#goToFields" prefHeight="50.0" prefWidth="247.0" text="Fields" />
          </children>
       </VBox>
-      <Label alignment="CENTER" layoutX="135.0" layoutY="55.0" prefHeight="38.0" prefWidth="322.0" text="TENNIS CLUB" />
+      <Label id="titol" alignment="CENTER" layoutX="135.0" layoutY="55.0" prefHeight="38.0" prefWidth="322.0" text="TENNIS CLUB" />
    </children>
 </AnchorPane>

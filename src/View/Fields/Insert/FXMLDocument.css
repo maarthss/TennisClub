@@ -1,6 +1,5 @@
-
 .mainFxmlClass {
-    
+
     -fx-background-color: #b3cdbf;
     -fx-padding: 20px;
 }
@@ -24,3 +23,4 @@
 #home:hover {
     -fx-background-color: #4bab8e;
 }
+

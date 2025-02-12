@@ -54,8 +54,8 @@
             </HBox>
          </children>
       </GridPane>
-      <Button fx:id="btUpdate" layoutX="165.0" layoutY="318.0" mnemonicParsing="false" onMouseClicked="#setNewData" prefHeight="25.0" prefWidth="434.0" text="Update field" />
-      <Label alignment="CENTER" layoutX="171.0" layoutY="45.0" prefHeight="42.0" prefWidth="421.0" text="MODIFY A FIELD" />
-      <Button fx:id="btFields" layoutX="165.0" layoutY="54.0" mnemonicParsing="false" onMouseClicked="#goBackFields" />
+      <Button id = "AddMatch" fx:id="btUpdate" layoutX="165.0" layoutY="318.0" mnemonicParsing="false" onMouseClicked="#setNewData" prefHeight="25.0" prefWidth="434.0" text="Update field" />
+      <Label id = "titol" alignment="CENTER" layoutX="171.0" layoutY="45.0" prefHeight="42.0" prefWidth="421.0" text="MODIFY A FIELD" />
+      <Button id = "home" fx:id="btFields" layoutX="165.0" layoutY="54.0" mnemonicParsing="false" onMouseClicked="#goBackFields" />
    </children>
 </AnchorPane>

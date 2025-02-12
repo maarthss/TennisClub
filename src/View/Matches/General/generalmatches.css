@@ -1,7 +1,44 @@
-/*
- * Empty Stylesheet file.
- */
 
 .mainFxmlClass {
 
+   -fx-background-color: #b3cdbf;
+   -fx-padding: 20px;
+}
+
+#titol {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-alignment: center;
+}
+
+#bt1{
+    -fx-background-color: #4bab8e;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+#bt2{
+    -fx-background-color: #4bab8e;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+#bt3{
+    -fx-background-color: #4bab8e;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+#home:hover {
+    -fx-background-color: #4bab8e;
 }

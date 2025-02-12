@@ -5,10 +5,15 @@ import Controller.CRUD.Insert;
 import Controller.FXMLControllers.Fields.RUD_fieldsController;
 import Controller.FXMLControllers.Fields.UpdateFieldsController;
 import Controller.FXMLControllers.Members.GeneralMembersController;
+import Controller.FXMLControllers.Members.InsertMembersController;
 import Model.Matches;
 import Model.Members;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -74,64 +79,79 @@ public class InsertMatchesController implements Initializable {
                     }
                 };
             }
-            
         });
-        
-        
     }    
     
     @FXML
-    public void insertData(){
-        
-        try{
+    public void insertData() {
+        try {
             Insert i = new Insert();
-        
+
             LocalDate date = dpDate.getValue();
             int member1 = Integer.parseInt(tfMember1.getText());
             int member2 = Integer.parseInt(tfMember2.getText());
             int field = Integer.parseInt(tfField.getText());
-        
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Insert Confirmation");
-            alert.setHeaderText("You're about to add a member");
+            alert.setHeaderText("You're about to add a match");
             alert.setContentText("Are you sure about that?");
-        
+
+            if (date == null || tfMember1.getText().isEmpty() || tfMember2.getText().isEmpty() || tfField.getText().isEmpty()) {
+                Alert error = new Alert(Alert.AlertType.WARNING);
+                error.setTitle("Insert error");
+                error.setHeaderText("Match could not be added");
+                error.setContentText("All fields must be filled");
+                error.showAndWait();
+                return;
+            }
+
             Optional<ButtonType> result = alert.showAndWait();
-            if(result.get() == ButtonType.OK){
-            
-                //Verificam que un jugador no pugui jugar contra ell mateix
-                if(member1 != member2){
-                    Matches m = new Matches();
-                    m.insertMatch(date, null, member1, member2, field);
-        
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Matches/General/GeneralMatches.fxml"));
-                        Parent root = loader.load();
+            if (result.get() == ButtonType.OK) {
                 
-                        GeneralMatchesController controller = loader.getController();
-                
-                        controller.refreshTable();
-                
-                        Stage stage = (Stage)btInsert.getScene().getWindow();
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException ex) {
-                        Logger.getLogger(UpdateFieldsController.class.getName()).log(Level.SEVERE, null, ex);
+                if (validationMembers(member1) && validationMembers(member2) && validationField(field)) {
+
+                    // Verificar que los jugadores no son el mismo
+                    if (member1 != member2) {
+                        Matches m = new Matches();
+                        m.insertMatch(date, null, member1, member2, field);
+
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Matches/General/GeneralMatches.fxml"));
+                            Parent root = loader.load();
+
+                            GeneralMatchesController controller = loader.getController();
+
+                            controller.refreshTable();
+
+                            Stage stage = (Stage) btInsert.getScene().getWindow();
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException ex) {
+                            Logger.getLogger(UpdateFieldsController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        throw new Exception("A player can't play against itself");
                     }
-                }else{
-                    throw new Exception();
+                } else {
+                    // Mostrar error si alguno de los jugadores no existe
+                    Alert error = new Alert(Alert.AlertType.ERROR);
+                    error.setTitle("Insert error");
+                    error.setHeaderText("Match could not be added");
+                    error.setContentText("One or both players or the field do not exist in the database");
+                    error.showAndWait();
                 }
             }
-       }catch(Exception e){
+        } catch (Exception e) {
             Alert error = new Alert(Alert.AlertType.ERROR);
             error.setTitle("Insert error");
-            error.setHeaderText("Cant add the match");
-            error.setContentText("A player can't play against itself");
+            error.setHeaderText("Can't add the match");
+            error.setContentText(e.getMessage()); // Mostrar el mensaje de la excepción
             error.showAndWait();
         }
     }
-    
+
     @FXML
     private void goToMatches(){
         try {
@@ -151,4 +171,53 @@ public class InsertMatchesController implements Initializable {
         }
     }
     
+    private boolean validationMembers(int id){
+        
+        boolean memberExists = false;
+        java.sql.Connection conn = null;
+        
+        String query = "SELECT * FROM members WHERE ID = ?";
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis_club", "root", "123456");
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, id);
+            
+            try (ResultSet rs = pst.executeQuery()){
+                if(rs.next()){
+                    memberExists = true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertMembersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                    
+        return memberExists;
+    }
+    
+    private boolean validationField(int id){
+        
+        boolean fieldExists = false;
+        java.sql.Connection conn = null;
+        
+        String query = "SELECT * FROM fields WHERE ID = ?";
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis_club", "root", "123456");
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, id);
+            
+            try (ResultSet rs = pst.executeQuery()){
+                if(rs.next()){
+                    fieldExists = true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertMembersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                    
+        return fieldExists;
+    }
 }
+
+

@@ -65,8 +65,8 @@
             </VBox>
          </children>
       </GridPane>
-      <Button fx:id="btInsert" layoutX="197.0" layoutY="496.0" mnemonicParsing="false" onMouseClicked="#insertData" prefHeight="40.0" prefWidth="486.0" text="Add member" />
-      <Label alignment="CENTER" layoutX="203.0" layoutY="68.0" prefHeight="47.0" prefWidth="474.0" text="ADD A MEMBER" />
-      <Button fx:id="btMembers" layoutX="122.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#goToMembers" />
+      <Button id="btAddMatch" fx:id="btInsert" layoutX="197.0" layoutY="496.0" mnemonicParsing="false" onMouseClicked="#insertData" prefHeight="40.0" prefWidth="486.0" text="Add member" />
+      <Label id="titol" alignment="CENTER" layoutX="203.0" layoutY="68.0" prefHeight="47.0" prefWidth="474.0" text="ADD A MEMBER" />
+      <Button id="home" fx:id="btMembers" layoutX="122.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#goToMembers" />
    </children>
 </AnchorPane>
