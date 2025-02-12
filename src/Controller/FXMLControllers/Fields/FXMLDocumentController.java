@@ -1,6 +1,7 @@
 package Controller.FXMLControllers.Fields;
 
 import Controller.CRUD.Insert;
+import Controller.FXMLControllers.MenuController;
 import Model.Fields;
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,8 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class FXMLDocumentController implements Initializable {
@@ -42,6 +45,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button btFields;
     
+    @FXML
+    private Button btBackToFields;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -49,7 +55,12 @@ public class FXMLDocumentController implements Initializable {
         ObservableList<String> statusValues = FXCollections.observableArrayList("Free", "Reserved");
         statusFields.setItems(statusValues);
         
-        priceFields.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(10.0, 25.0, 0.0, 0.2));      
+        priceFields.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(10.0, 25.0, 0.0, 0.2)); 
+        
+        URL home = getClass().getResource("/Resources/casa.png");
+        Image imgHome = new Image(home.toString(), 24, 24, false, true);
+        btBackToFields.setGraphic((new ImageView(imgHome)));
+        
     }    
     
     @FXML
@@ -91,4 +102,24 @@ public class FXMLDocumentController implements Initializable {
             }
         }
     }
+    
+    @FXML
+    private void goBackFields(){
+        try {
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fields/General/RUD_fields.fxml"));
+            Parent root = loader.load();
+            RUD_fieldsController controller = loader.getController();
+            
+            Stage stage = (Stage)btBackToFields.getScene().getWindow();
+            
+            Scene newScene = new Scene(root);
+            stage.setScene(newScene);
+            stage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(RUD_fieldsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

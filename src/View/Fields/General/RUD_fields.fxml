@@ -42,5 +42,6 @@
          </children>
       </VBox>
       <Label alignment="CENTER" layoutX="315.0" layoutY="46.0" prefHeight="40.0" prefWidth="236.0" text="FIELDS" />
+      <Button fx:id="btHome" layoutX="132.0" layoutY="46.0" mnemonicParsing="false" onMouseClicked="#goBackHome" />
    </children>
 </AnchorPane>

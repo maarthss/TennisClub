@@ -26,6 +26,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class UpdateFieldsController implements Initializable {
@@ -44,6 +46,9 @@ public class UpdateFieldsController implements Initializable {
     
     @FXML 
     private Label lbID;
+    
+    @FXML
+    private Button btFields;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -54,7 +59,12 @@ public class UpdateFieldsController implements Initializable {
         
         String name = tfName.getText();
         Double price = (Double) spPrice.getValue();
-        String status = (String) cbStatus.getValue();        
+        String status = (String) cbStatus.getValue();
+
+
+        URL home = getClass().getResource("/Resources/casa.png");
+        Image imgHome = new Image(home.toString(), 24, 24, false, true);
+        btFields.setGraphic((new ImageView(imgHome)));
         
     }    
     
@@ -112,6 +122,26 @@ public class UpdateFieldsController implements Initializable {
 
         }
 
+    }
+    
+    
+    @FXML
+    private void goBackFields(){
+        try {
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fields/General/RUD_fields.fxml"));
+            Parent root = loader.load();
+            RUD_fieldsController controller = loader.getController();
+            
+            Stage stage = (Stage)btFields.getScene().getWindow();
+            
+            Scene newScene = new Scene(root);
+            stage.setScene(newScene);
+            stage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(RUD_fieldsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

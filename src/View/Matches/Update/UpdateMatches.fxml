@@ -13,12 +13,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="617.0" prefWidth="884.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLControllers.Matches.UpdateMatchesController">
+<AnchorPane id="AnchorPane" prefHeight="602.0" prefWidth="775.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FXMLControllers.Matches.UpdateMatchesController">
     <stylesheets>
         <URL value="@updatematches.css" />
     </stylesheets>
    <children>
-      <GridPane layoutX="113.0" layoutY="39.0" prefHeight="271.0" prefWidth="495.0">
+      <GridPane layoutX="153.0" layoutY="155.0" prefHeight="271.0" prefWidth="495.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -67,7 +67,8 @@
             </VBox>
          </children>
       </GridPane>
-      <Button fx:id="btUpdate" layoutX="175.0" layoutY="464.0" mnemonicParsing="false" onMouseClicked="#setNewData" prefHeight="25.0" prefWidth="529.0" text="Update Match" />
-      <Label prefHeight="49.0" prefWidth="801.0" text="MODIFY A MATCH" />
+      <Button fx:id="btUpdate" layoutX="136.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#setNewData" prefHeight="25.0" prefWidth="529.0" text="Update Match" />
+      <Label alignment="CENTER" layoutX="163.0" layoutY="50.0" prefHeight="49.0" prefWidth="475.0" text="MODIFY A MATCH" />
+      <Button fx:id="btMatches" layoutX="136.0" layoutY="50.0" mnemonicParsing="false" onMouseClicked="#goToMatches" />
    </children>
 </AnchorPane>

@@ -75,5 +75,6 @@
       </GridPane>
       <Button fx:id="btUpdate" layoutX="225.0" layoutY="501.0" mnemonicParsing="false" onMouseClicked="#setNewData" prefHeight="25.0" prefWidth="534.0" text="Update Member" />
       <Label alignment="CENTER" layoutX="268.0" layoutY="63.0" prefHeight="39.0" prefWidth="433.0" text="MODIFY A MEMBER" />
+      <Button fx:id="btMembers" layoutX="172.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#goToMembers" />
    </children>
 </AnchorPane>

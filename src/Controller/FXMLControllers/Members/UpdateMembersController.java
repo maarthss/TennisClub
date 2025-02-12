@@ -23,11 +23,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 
 public class UpdateMembersController implements Initializable {
@@ -55,10 +59,59 @@ public class UpdateMembersController implements Initializable {
     
     @FXML
     private Label lbID;
+    
+    @FXML
+    private Button btMembers;
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        tfDNI.setEditable(false);
+        tfDNI.setMouseTransparent(true);
+        
+        URL home = getClass().getResource("/Resources/casa.png");
+        Image imgHome = new Image(home.toString(), 24, 24, false, true);
+        btMembers.setGraphic((new ImageView(imgHome)));
+        
+        LocalDate actualDate = LocalDate.now(); //Local date que servirà tant pel datePicker de membership com pel de birth
+        
+        //Feim que la data de l'inici de la subcripció no pugui ser anterior a l'actual
+        dpMembership.setDayCellFactory(new Callback<DatePicker, DateCell>(){
+            @Override
+            public DateCell call(DatePicker param) {
+                return new DateCell(){
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty){
+                        super.updateItem(item, empty);
+                        
+                        if(item.isBefore(actualDate)){
+                            setDisable(true);
+                        }
+                    }
+                };
+            }
+            
+        });
+        
+        
+        //Feim que la data de naixement no pugui ser superior a la del dia actual
+        dpBirth.setDayCellFactory(new Callback<DatePicker, DateCell>(){
+            @Override
+            public DateCell call(DatePicker param) {
+                return new DateCell(){
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty){
+                        super.updateItem(item, empty);
+                        
+                        if(item.isAfter(actualDate)){
+                            setDisable(true);
+                        }
+                    }
+                };
+            }
+            
+        });
  
     }    
     
@@ -117,10 +170,25 @@ public class UpdateMembersController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(UpdateFieldsController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }  
+    }
+    
+    @FXML
+    private void goToMembers(){
+        try {
             
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Members/General/GeneralMembers.fxml"));
+            Parent root = loader.load();
+            GeneralMembersController controller = loader.getController();
+            
+            Stage stage = (Stage)btMembers.getScene().getWindow();
+            
+            Scene newScene = new Scene(root);
+            stage.setScene(newScene);
+            stage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(RUD_fieldsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        
     }
 }

@@ -27,7 +27,16 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.function.UnaryOperator;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Callback;
+import org.w3c.dom.Document;
 
 
 public class InsertMembersController implements Initializable {
@@ -54,9 +63,57 @@ public class InsertMembersController implements Initializable {
     @FXML
     private Button btInsert;
     
+    @FXML
+    private Button btMembers;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        URL home = getClass().getResource("/Resources/casa.png");
+        Image imgHome = new Image(home.toString(), 24, 24, false, true);
+        btMembers.setGraphic((new ImageView(imgHome)));
+        
+        
+        LocalDate actualDate = LocalDate.now(); //Local date que servirà tant pel datePicker de membership com pel de birth
+        
+        //Feim que la data de l'inici de la subcripció no pugui ser anterior a l'actual
+        dpMembership.setDayCellFactory(new Callback<DatePicker, DateCell>(){
+            @Override
+            public DateCell call(DatePicker param) {
+                return new DateCell(){
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty){
+                        super.updateItem(item, empty);
+                        
+                        if(item.isBefore(actualDate)){
+                            setDisable(true);
+                        }
+                    }
+                };
+            }
+            
+        });
+        
+        
+        //Feim que la data de naixement no pugui ser superior a la del dia actual
+        dpBirth.setDayCellFactory(new Callback<DatePicker, DateCell>(){
+            @Override
+            public DateCell call(DatePicker param) {
+                return new DateCell(){
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty){
+                        super.updateItem(item, empty);
+                        
+                        if(item.isAfter(actualDate)){
+                            setDisable(true);
+                        }
+                    }
+                };
+            }
+            
+        });
+        
     }    
     
     
@@ -104,4 +161,45 @@ public class InsertMembersController implements Initializable {
         }
     }
     
+    @FXML
+    private void goToMembers(){
+        try {
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Members/General/GeneralMembers.fxml"));
+            Parent root = loader.load();
+            GeneralMembersController controller = loader.getController();
+            
+            Stage stage = (Stage)btMembers.getScene().getWindow();
+            
+            Scene newScene = new Scene(root);
+            stage.setScene(newScene);
+            stage.show();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(RUD_fieldsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    private boolean validationDNI(String dni){
+        
+        boolean dniExists = false;
+        java.sql.Connection conn = null;
+
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/tennis_club", "root", "123456");
+            
+            String query = "SELECT * FROM members WHERE DNI = " + dni ;
+        } catch (SQLException ex) {
+            Logger.getLogger(InsertMembersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        String query = "SELECT * FROM members WHERE DNI = " + dni ;
+        //Statement st = conn.createStatement(query);
+        
+        
+        
+        
+        return dniExists;
+    }
 }

@@ -1,5 +1,6 @@
 package Controller.FXMLControllers.Fields;
 
+import Controller.FXMLControllers.MenuController;
 import Model.Fields;
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -33,12 +36,6 @@ public class RUD_fieldsController implements Initializable {
 
     @FXML
     private TextField nameFields;
-    
-    @FXML
-    private Spinner priceFields;
-    
-    @FXML
-    private ChoiceBox statusFields;
     
     @FXML
     private TableColumn columnID;
@@ -66,6 +63,11 @@ public class RUD_fieldsController implements Initializable {
     
     private ObservableList<Fields> filteredList;
     
+    @FXML
+    private Button btHome;
+    
+    
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -80,28 +82,43 @@ public class RUD_fieldsController implements Initializable {
         
         tableFields.setItems(f.getFields());
         
+        
+        URL home = getClass().getResource("/Resources/casa.png");
+        Image imgHome = new Image(home.toString(), 24, 24, false, true);
+        btHome.setGraphic((new ImageView(imgHome)));
+        
     }    
     
     @FXML
     public void deleteSelectedField(){
         
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Delete Confirmation");
-        alert.setHeaderText("You're about to delete a field");
-        alert.setContentText("Are you sure about that?");
+        try{
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Delete Confirmation");
+            alert.setHeaderText("You're about to delete a field");
+            alert.setContentText("Are you sure about that?");
         
-        Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK){
-            Fields f = new Fields();
-            Fields selectedField = tableFields.getSelectionModel().getSelectedItem();
-            if(selectedField != null){
-                int selectedId = selectedField.getId();
-                selectedField.deleteFields(selectedId);
-                f.getFields().remove(selectedField);
-                refreshTable();
-            }else{
-                alert.close();
-            }
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.get() == ButtonType.OK){
+                Fields f = new Fields();
+                Fields selectedField = tableFields.getSelectionModel().getSelectedItem();
+                if(selectedField != null){
+                    int selectedId = selectedField.getId();
+                    selectedField.deleteFields(selectedId);
+                    f.getFields().remove(selectedField);
+                    refreshTable();
+                }else{
+                    throw new Exception();
+                }
+        }
+        }catch(Exception e){
+            
+            Alert error = new Alert(Alert.AlertType.WARNING);
+            error.setTitle("Warning");
+            error.setHeaderText("Can't delete the match");
+            error.setContentText("Select a match to delete");
+            error.showAndWait();
+            
         }
     }
     
@@ -112,46 +129,58 @@ public class RUD_fieldsController implements Initializable {
     }
     
     @FXML
-    public Fields updateSelectedField(){   
+    public Fields updateSelectedField(){
         
         Fields f = null;
         
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Update Confirmation");
-        alert.setHeaderText("You're about to update a field");
-        alert.setContentText("Are you sure about that?");
-        
-        
-        Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK){
-            Fields selectedField = tableFields.getSelectionModel().getSelectedItem();
-        
-            if(selectedField != null){
-                int id = selectedField.getId();
-                String name = selectedField.getName();
-                Double price = selectedField.getPrice();
-                String status = selectedField.getStatus();
+        try{
             
-                f = new Fields(id, name, price, status);
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Update Confirmation");
+            alert.setHeaderText("You're about to update a field");
+            alert.setContentText("Are you sure about that?");
+            
+            Optional<ButtonType> result = alert.showAndWait();
+            if(result.get() == ButtonType.OK){
+                Fields selectedField = tableFields.getSelectionModel().getSelectedItem();
+        
+                if(selectedField != null){
+                    int id = selectedField.getId();
+                    String name = selectedField.getName();
+                    Double price = selectedField.getPrice();
+                    String status = selectedField.getStatus();
+            
+                    f = new Fields(id, name, price, status);
+                }else{
+                    throw new Exception();
+                }
+        
+                try {
+            
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fields/Update/UpdateFields.fxml"));
+                    Parent root = loader.load();
+                    UpdateFieldsController ufController = loader.getController();
+                    ufController.getData(f);
+            
+                    Stage stage = (Stage)tableFields.getScene().getWindow();
+            
+                    Scene newScene = new Scene(root);
+                    stage.setScene(newScene);
+                    stage.show();
+            
+                } catch (IOException ex) {
+                    Logger.getLogger(RUD_fieldsController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        
-            try {
+        }catch(Exception e){
             
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fields/Update/UpdateFields.fxml"));
-                Parent root = loader.load();
-                UpdateFieldsController ufController = loader.getController();
-                ufController.getData(f);
-            
-                Stage stage = (Stage)tableFields.getScene().getWindow();
-            
-                Scene newScene = new Scene(root);
-                stage.setScene(newScene);
-                stage.show();
-            
-            } catch (IOException ex) {
-                Logger.getLogger(RUD_fieldsController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Alert error = new Alert(Alert.AlertType.WARNING);
+            error.setTitle("Warning");
+            error.setHeaderText("Can't update the field");
+            error.setContentText("Select a field to update");
+            error.showAndWait();
         }
+        
         return f;
     }
     
@@ -194,6 +223,21 @@ public class RUD_fieldsController implements Initializable {
         }
     }
     
-    
+     @FXML
+    private void goBackHome(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Menu.fxml"));
+            Parent root = loader.load();
+                
+            MenuController controller = loader.getController();
+                                
+            Stage stage = (Stage)btHome.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(UpdateFieldsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }
